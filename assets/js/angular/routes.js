@@ -8,7 +8,7 @@ function routes($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/home');
     $stateProvider.state('home', {
         url: '/home',
-        template: require('html!./routes/home.view.html'),
+        template: require('html!./routes/home/home.view.html'),
         controller: 'HomeController'
     });
 }

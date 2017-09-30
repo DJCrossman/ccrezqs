@@ -21,7 +21,11 @@ var config = {
   },
   devtool: 'source-map',
   module: {
-    loaders: [,{
+    loaders: [{
+      test: /\.js$/,
+      exclude: /(node_modules)/,
+      loader: 'ng-annotate!babel'
+    },{
       test: /\.s?css$/,
       exclude: /(node_modules)/,
       loaders: ['style', 'css?sourceMap', 'autoprefixer', 'sass?sourceMap']

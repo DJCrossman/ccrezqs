@@ -7,6 +7,6 @@ var module = angular.module('App', [
     'ui.router'
 ]);
 
-require('./routes/home.controller.js')(module);
+require('./routes/home/home.controller.js')(module);
 
 require('./routes.js')(module);

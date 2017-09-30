@@ -63,7 +63,7 @@ module.exports.connections = {
   //   user: 'username', //optional
   //   password: 'password', //optional
   //   database: 'your_mongo_db_name_here' //optional
-  }
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -89,4 +89,11 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
 
+  // Twilio
+  twilio: {
+    accountSid: process.env.TWILIO_ACCOUNT_SID,
+    apiKey: process.env.TWILIO_API_KEY,
+    apiSecret: process.env.TWILIO_API_SECRET,
+    phone: process.env.TWILIO_PHONE_NUMBER
+  }
 };

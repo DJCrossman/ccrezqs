@@ -35,6 +35,12 @@ module.exports = {
       type: 'address',
       required: true
     },
+    phone: {
+      type: 'string'
+    },
+    email: {
+      type: 'string'
+    },
     occupation: {
       type: 'string'
     },

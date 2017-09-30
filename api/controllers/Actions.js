@@ -51,7 +51,7 @@ module.exports = {
                 sex: p.Gender,
                 state: 'pending',
                 species: p.Breed,
-                photo: body.MediaUrl0,
+                photo: body.images[0],
                 traits: [p.traits, p.traits1]
             }
             Pet.create(pet).exec(function (err, message){

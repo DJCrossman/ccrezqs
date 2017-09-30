@@ -18,6 +18,8 @@ var apiai = require('apiai');
 var ai = apiai("d0d677bc7a1748fa90c048b54d789435");
 var actions = require('./Actions.js');
 
+let dogImages = [];
+
 function ask(text, options) {
   return new Promise((resolve, reject) => { 
   let apiaiRequest = ai.textRequest(text, options);
@@ -66,6 +68,12 @@ module.exports = {
     }).then((resp) => {
       console.log(resp);
       const result = resp.result;
+      console.log(body);
+      if (body.MediaUrl0) {
+        dogImages.push(body.MediaUrl0);
+      }
+      body.images = dogImages;
+      console.log(dogImages);
       if (!result.actionIncomplete 
         && (result.action == 'book-appointment' 
         || result.action == 'new-dog'
@@ -75,9 +83,9 @@ module.exports = {
           resetContexts: true
         });
         actions.doAction(result, body).then((rezzy) => {
+          dogImages.shift();
           return res.send(rezzy);
         });
-        
       } else {
         return res.send('<Response><Message>' + resp.result.fulfillment.speech + '</Message></Response>');                
       }

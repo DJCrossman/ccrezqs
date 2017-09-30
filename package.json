@@ -45,6 +45,7 @@
   "author": "davidcrossman",
   "license": "",
   "devDependencies": {
+    "angular-ui-bootstrap": "^2.5.0",
     "html-loader": "^0.5.1",
     "ng-annotate-loader": "^0.1.0",
     "webpack": "^1.15.0",

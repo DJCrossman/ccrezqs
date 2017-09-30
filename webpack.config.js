@@ -22,13 +22,12 @@ var config = {
   devtool: 'source-map',
   module: {
     loaders: [{
+			test : /\.css$/,
+			loader : "style-loader!css-loader"
+		}, {
       test: /\.js$/,
       exclude: /(node_modules)/,
       loader: 'ng-annotate!babel'
-    },{
-      test: /\.s?css$/,
-      exclude: /(node_modules)/,
-      loaders: ['style', 'css?sourceMap', 'autoprefixer', 'sass?sourceMap']
     }, {
       test: /\.(jpe?g|png|gif)$/,
       exclude: /(node_modules)/,

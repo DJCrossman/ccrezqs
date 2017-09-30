@@ -22,9 +22,9 @@ module.exports = {
       if(err) {
         return res.serverError(err);
       } else {
-        Message.create(message).exec(function (err, message){
+        Message.create(message).exec(function (err, options){
           if (err) { return res.serverError(err); }
-          sails.log(message);
+          sails.log(options);
           return res.send('Successfully created SMS!');
         });
       }

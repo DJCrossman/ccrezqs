@@ -55,7 +55,7 @@ module.exports = {
     },
     microchip: {
       type: 'string'
-    }
+    },
     photo: {
       type: 'boolean'
     },

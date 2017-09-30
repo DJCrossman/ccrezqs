@@ -36,7 +36,7 @@ module.exports = {
       required: true
     },
     traits: {
-      type: 'string'
+      type: 'array'
     },
     birthdate: {
       type: 'date',

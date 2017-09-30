@@ -95,5 +95,12 @@ module.exports.connections = {
     apiKey: process.env.TWILIO_API_KEY,
     apiSecret: process.env.TWILIO_API_SECRET,
     phone: process.env.TWILIO_PHONE_NUMBER
+  },
+
+  // S3
+  s3: {
+    key: process.env.AWS_KEY,
+    secret: process.env.AWS_SECRET,
+    bucket: process.env.S3_BUCKET
   }
 };

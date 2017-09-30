@@ -27,6 +27,11 @@ module.exports = {
       apiKey: 'SKb1492c5bad35aa2e58d64dd0e80facf0',
       apiSecret: 'i92iTigEcm18FmDypoo3OXbh3NSHISSa',
       phone: '+13069934716'
+    },
+    s3: {
+      key: "AKIAIAZJFL3S34BIVDIQ",
+      secret: "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",
+      bucket: "ccrezqs"
     }
   }
 

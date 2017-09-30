@@ -34,7 +34,9 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+
+  '/pets/photo/:id': 'PetController.photo'
 
   /***************************************************************************
   *                                                                          *

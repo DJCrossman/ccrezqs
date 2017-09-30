@@ -1,13 +1,78 @@
 <div class="row register-pet">
-    <div class="col-xs-6">
+    <div class="col-xs-6 col-xs-offset-3">
         <h2>Register Pet</h2>
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name">
+            <input type="text" class="form-control" id="name" ng-model="params.name">
         </div>
         <div class="form-group">
-            <label for="age">Age:</label>
-            <input type="text" class="form-control" id="age">
+            <label for="birthdate">Birth date:</label>
+            <input type="text" class="form-control" uib-datepicker-popup="'dd-MMMM-yyyy'" ng-model="params.birthdate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="species">Species:</label>
+            <input type="text" class="form-control" id="species" ng-model="params.species">
+        </div>
+        <div class="form-group">
+            <label for="breed">Breed:</label>
+            <input type="text" class="form-control" id="breed" ng-model="params.breed">
+        </div>
+        <div class="form-group">
+            <label for="traits">Traits:</label>
+            <input type="text" class="form-control" id="traits" ng-model="params.traits">
+        </div>
+        <div class="form-group">
+            <label for="sex">Gender:</label>
+            <select id="sex">
+              <option ng-repeat="gender in genders" value="gender" ng-model="params.gender">{{gender}}</option>
+            </select>
         </div>
     </div>
 </div>
+
+<!--    name: {
+    type: 'string'
+  },
+  state: {
+    type: 'string',
+    enum: ['pending', 'approved', 'denied', 'adopted', 'fostered'],
+    required: true
+  },
+  species: {
+    type: 'string',
+    required: true
+  },
+  breed: {
+    type: 'string',
+    required: true
+  },
+  traits: {
+    type: 'string'
+  },
+  birthdate: {
+    type: 'date',
+    required: true
+  },
+  sex: {
+    type: 'string',
+    enum: ['male', 'female', 'other'],
+    required: true
+  },
+  diet: {
+    type: 'string'
+  },
+  tatoo: {
+    type: 'string'
+  },
+  microchip: {
+    type: 'string'
+  },
+  photo: {
+    type: 'boolean'
+  },
+  description: {
+    type: 'string'
+  }-->

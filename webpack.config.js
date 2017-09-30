@@ -30,9 +30,6 @@ var config = {
       exclude: /(node_modules)/,
       loaders: ['style', 'css?sourceMap', 'autoprefixer', 'sass?sourceMap']
     }, {
-      test: /\.html$/,
-      loader: 'html-loader'
-    }, {
       test: /\.(jpe?g|png|gif)$/,
       exclude: /(node_modules)/,
       loader: 'url?limit=10000'

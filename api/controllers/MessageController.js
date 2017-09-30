@@ -14,6 +14,28 @@ const twilioPhone = sails.config.connections.twilio.phone;
 
 //App Clients
 var twilioClient = require('twilio')(twilioApiKey, twilioApiSecret, { accountSid: twilioAccountSid });
+var apiai = require('apiai');
+var ai = apiai("d0d677bc7a1748fa90c048b54d789435");
+var fetch = require('node-fetch');
+const path = require('path');
+const fs = require('fs');
+const extName = require('ext-name');
+const urlUtil = require('url');
+
+var actions = require('./Actions.js');
+
+function ask(text, options) {
+  return new Promise((resolve, reject) => { 
+  let apiaiRequest = ai.textRequest(text, options);
+  apiaiRequest.on('response', (response) => {
+        resolve(response); 
+    })
+    apiaiRequest.on('error', (error) => { 
+      console.log(error); 
+    });
+    apiaiRequest.end();
+  });
+}
 
 module.exports = {
 	send: (req, res) => {
@@ -40,11 +62,39 @@ module.exports = {
       status: 'unread',
       body: req.body.Body
     });
-    Message.create(options).exec(function (err, message){
-      if (err) { return res.serverError(err); }
-      sails.log(options);
-      return res.send('Successfully received SMS!');
-    });;
+
+    const body = req.body;
+    if (body.MediaUrl0 != '')
+
+    ask(req.body.Body, {
+      sessionId: req.body.From,
+      //resetContexts: true,
+      contexts: [{ name: req.body.From }]
+    }).then((resp) => {
+      console.log(resp);
+      const result = resp.result;
+      if (result.action == 'input.unknown') {
+        return res.send('<Response><Message>' + resp.result.fulfillment.speech + '</Message></Response>');        
+      }
+      if (!result.actionIncomplete) {
+        ai.textRequest('', {
+          sessionId: req.body.From,
+          resetContexts: true
+        });
+        actions.doAction(result, body).then((rezzy) => {
+          return res.send(rezzy);
+        });
+        
+      } else {
+        return res.send('<Response><Message>' + resp.result.fulfillment.speech + '</Message></Response>');                
+      }
+    });
+
+    // Message.create(options).exec(function (err, message){
+    //   if (err) { return res.serverError(err); }
+    //   sails.log(options);
+    //   return res.send('Successfully received SMS!');
+    // });
   },
   markRead: (req, res) => {
     Message.update({id: req.param('id')}, {status: 'read'}).exec(function (err, message){
@@ -71,5 +121,30 @@ module.exports = {
       sails.log(options);
       return res.send(messages);
     });
-  }
+  },
 };
+
+function SaveMedia(mediaItem) {
+  const { mediaUrl, filename } = mediaItem;
+  if (process.env !== 'test') {
+    const fullPath = path.resolve(`./${filename}`);
+
+    if (!fs.existsSync(fullPath)) {
+      const response = fetch(mediaUrl);
+      const fileStream = fs.createWriteStream(fullPath);
+
+      //response.body.pipe(fileStream);
+
+      deleteMediaItem(mediaItem);
+    }
+
+    //images.push(filename);
+  }
+}
+
+function deleteMediaItem(mediaItem) {
+  return twilioClient
+    .api.accounts(twilioAccountSid)
+    .messages(mediaItem.MessageSid)
+    .media(mediaItem.mediaSid).remove();
+}

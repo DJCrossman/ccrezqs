@@ -73,10 +73,9 @@ module.exports = {
     }).then((resp) => {
       console.log(resp);
       const result = resp.result;
-      if (result.action == 'input.unknown') {
-        return res.send('<Response><Message>' + resp.result.fulfillment.speech + '</Message></Response>');        
-      }
-      if (!result.actionIncomplete) {
+      if (!result.actionIncomplete 
+        && (result.action == 'book-appointment' 
+        || result.action == 'new-dog')) {
         ai.textRequest('', {
           sessionId: req.body.From,
           resetContexts: true
@@ -123,28 +122,3 @@ module.exports = {
     });
   },
 };
-
-function SaveMedia(mediaItem) {
-  const { mediaUrl, filename } = mediaItem;
-  if (process.env !== 'test') {
-    const fullPath = path.resolve(`./${filename}`);
-
-    if (!fs.existsSync(fullPath)) {
-      const response = fetch(mediaUrl);
-      const fileStream = fs.createWriteStream(fullPath);
-
-      //response.body.pipe(fileStream);
-
-      deleteMediaItem(mediaItem);
-    }
-
-    //images.push(filename);
-  }
-}
-
-function deleteMediaItem(mediaItem) {
-  return twilioClient
-    .api.accounts(twilioAccountSid)
-    .messages(mediaItem.MessageSid)
-    .media(mediaItem.mediaSid).remove();
-}

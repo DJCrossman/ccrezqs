@@ -49,9 +49,4 @@ var config = {
   }
 };
 
-if (process.env.NODE_ENV === 'production') {
-  config.output.path = __dirname + '/build';
-  config.plugins.push(new optimize.UglifyJsPlugin());
-}
-
 module.exports = config;

@@ -17,7 +17,11 @@ var twilioClient = require('twilio')(twilioApiKey, twilioApiSecret, { accountSid
 
 module.exports = {
 	send: (req, res) => {
-    let options = Object.assign({from: twilioPhone}, req.body, {type:'sent', to: `+${req.body.to.length === 10 ? ('1' + req.body.to) : req.body.to}`});
+    let options = Object.assign({from: twilioPhone}, req.body, {
+      type:'sent',
+      to: `+${req.body.to.length === 10 ? ('1' + req.body.to) : req.body.to}`,
+      status: 'unread'
+    });
     twilioClient.messages.create(options, (err, message) => {
       if(err) {
         return res.serverError(err);
@@ -31,12 +35,29 @@ module.exports = {
     });
   },
   receive: (req, res) => {
-    let message = req.body || {};
-    message.type = 'received';
-    Message.create(message).exec(function (err, message){
+    let options = Object.assign({from: twilioPhone}, req.body, {
+      type:'received',
+      status: 'unread',
+      body: req.body.Body
+    });
+    Message.create(options).exec(function (err, message){
       if (err) { return res.serverError(err); }
-      sails.log(message);
-      return res.send('Successfully created SMS!');
+      sails.log(options);
+      return res.send('Successfully received SMS!');
     });;
-  }
+  },
+  markRead: (req, res) => {
+    Message.update({id: req.param('id')}, {status: 'read'}).exec(function (err, message){
+      if (err) { return res.serverError(err); }
+      sails.log(options);
+      return res.send('Marked read for message: ' + message.id);
+    });
+  },
+  markRead: (req, res) => {
+    Message.update({id: req.param('id')}, {status: 'unread'}).exec(function (err, message){
+      if (err) { return res.serverError(err); }
+      sails.log(options);
+      return res.send('Marked unread for message: ' + message.id);
+    });
+  },
 };

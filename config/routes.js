@@ -36,7 +36,8 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  '/pets/photo/:id': 'PetController.photo'
+  '/pets/photo/:id': 'PetController.photo',
+  '/message/phone/:number': 'MessageController.findByPhone'
 
   /***************************************************************************
   *                                                                          *

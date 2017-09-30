@@ -26,7 +26,6 @@ module.exports = {
           textParams: req.params.all()
         });
       });
-
     });
   }
 };

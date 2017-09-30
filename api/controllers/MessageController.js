@@ -60,4 +60,16 @@ module.exports = {
       return res.send('Marked unread for message: ' + message.id);
     });
   },
+  findByPhone: (req, res) => {
+    Message.find({
+      or : [
+        { to: {contains: {id: req.param('number')}} },
+        { from: {contains: {id: req.param('number')}} }
+      ]
+    }).exec(function (err, messages){
+      if (err) { return res.serverError(err); }
+      sails.log(options);
+      return res.send(messages);
+    });
+  }
 };

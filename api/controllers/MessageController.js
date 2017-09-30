@@ -17,13 +17,8 @@ var twilioClient = require('twilio')(twilioApiKey, twilioApiSecret, { accountSid
 
 module.exports = {
 	send: (req, res) => {
-    let message = req.body || {};
-    message.type = 'sent';
-    twilioClient.messages.create({
-        to: `+${message.phone.length === 10 ? ('1' + message.phone) : message.phone}`,
-        from: twilioPhone,
-        body: message.body
-    }, (err, message) => {
+    let options = Object.assign({from: twilioPhone}, req.body, {type:'sent', to: `+${req.body.to.length === 10 ? ('1' + req.body.to) : req.body.to}`});
+    twilioClient.messages.create(options, (err, message) => {
       if(err) {
         return res.serverError(err);
       } else {

@@ -61,6 +61,10 @@ module.exports = {
     },
     description: {
       type: 'string'
+    },
+    owners: {
+      collection: 'owner',
+      via: 'pets'
     }
   }
 };

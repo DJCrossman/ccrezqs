@@ -28,12 +28,10 @@ module.exports = {
       required: true
     },
     birthdate: {
-      type: 'date',
-      required: true
+      type: 'date'
     },
     address: {
-      type: 'json',
-      required: true
+      type: 'json'
     },
     phone: {
       type: 'string',
@@ -53,8 +51,7 @@ module.exports = {
       type: 'array'
     },
     hasFostered: {
-      type: 'boolean',
-      required: true
+      type: 'boolean'
     },
     fosterExperience: {
       type: 'string'
@@ -76,6 +73,11 @@ module.exports = {
     },
     campaign: {
       type: 'string'
+    },
+    pets: {
+      collection: 'pet',
+      via: 'owners',
+      dominant: true
     }
   }
 };

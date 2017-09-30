@@ -68,7 +68,8 @@ module.exports = {
       const result = resp.result;
       if (!result.actionIncomplete 
         && (result.action == 'book-appointment' 
-        || result.action == 'new-dog')) {
+        || result.action == 'new-dog'
+        || result.action == 'subscribe-to-dog')) {
         ai.textRequest('', {
           sessionId: req.body.From,
           resetContexts: true

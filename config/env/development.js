@@ -24,7 +24,7 @@ module.exports = {
   connections: {
     twilio: {
       accountSid: 'AC93f4cdcebf8ae43b8069d9f28e593682',
-      apiKey: 'SKb1492c5bad35aa2e58d64dd0e80facf0',
+      apiKey: '437124257789104d13237e2af9158a3d',
       apiSecret: '437124257789104d13237e2af9158a3d',
       phone: '+13069942992'
     },

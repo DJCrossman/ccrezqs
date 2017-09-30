@@ -32,7 +32,7 @@ module.exports = {
       required: true
     },
     address: {
-      type: 'address',
+      type: 'json',
       required: true
     },
     phone: {

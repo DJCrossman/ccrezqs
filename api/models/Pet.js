@@ -57,7 +57,7 @@ module.exports = {
       type: 'string'
     },
     photo: {
-      type: 'boolean'
+      type: 'string'
     },
     description: {
       type: 'string'

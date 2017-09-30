@@ -16,12 +16,6 @@ const twilioPhone = sails.config.connections.twilio.phone;
 var twilioClient = require('twilio')(twilioApiKey, twilioApiSecret, { accountSid: twilioAccountSid });
 var apiai = require('apiai');
 var ai = apiai("d0d677bc7a1748fa90c048b54d789435");
-var fetch = require('node-fetch');
-const path = require('path');
-const fs = require('fs');
-const extName = require('ext-name');
-const urlUtil = require('url');
-
 var actions = require('./Actions.js');
 
 function ask(text, options) {
@@ -64,7 +58,6 @@ module.exports = {
     });
 
     const body = req.body;
-    if (body.MediaUrl0 != '')
 
     ask(req.body.Body, {
       sessionId: req.body.From,

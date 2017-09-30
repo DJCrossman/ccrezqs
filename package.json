@@ -7,7 +7,6 @@
   "dependencies": {
     "apiai": "^4.0.3",
     "ejs": "2.3.4",
-    "ext-name": "^5.0.0",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-coffee": "1.0.0",
@@ -22,7 +21,6 @@
     "grunt-sync": "0.5.2",
     "include-all": "^1.0.0",
     "moment": "^2.18.1",
-    "node-fetch": "^1.7.3",
     "rc": "1.0.1",
     "sails": "~0.12.11",
     "sails-disk": "~0.10.9",

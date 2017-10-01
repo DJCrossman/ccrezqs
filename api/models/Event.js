@@ -28,6 +28,9 @@ module.exports = {
       enum: ['vaccine', 'medical', 'foster', 'checked-in', 'adopted'],
       required: true
     },
+    when: {
+      type: 'Date',
+    },
     cost: {
       type: 'string'
     },

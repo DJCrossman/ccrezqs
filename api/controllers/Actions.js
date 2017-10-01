@@ -100,7 +100,7 @@ module.exports = {
                 }
                 console.log(phoneNum);
                 Owner.findOne({ phone : phoneNum }).populate('pets').exec(function(err, owner) {
-                    if (err || !owner || owner == undefined) {
+                    if (err || !owner || !owner.pets) {
                         resolve(`<Response><Message>
                         Couldn't find owner with that number
                         </Message></Response>`); 

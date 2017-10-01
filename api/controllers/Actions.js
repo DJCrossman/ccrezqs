@@ -35,6 +35,20 @@ module.exports = {
                   });
             });
         });
+        let type = '';
+        if (p.Medical == "Shots") {
+            type = 'vaccine'
+        } else if (p.Medical == "Vet") {
+            type = 'medical'
+        }
+        Event.create({
+            title: `Appointment for ${p['Dog-Ids']}`,
+            type,
+            when: p.date,
+            description: `${p.Medical} at ${p.time} on ${p.date}`
+        }).exec((err, msg) => {
+            sails.log('new event created');
+        });
         return `<Response><Message>Okay, I have booked ${p['Dog-Ids']} ${medName} at ${p.time} on ${p.date}</Message></Response>`;         
     },
     addNewDog(result, body) {
@@ -60,6 +74,13 @@ module.exports = {
                     resolve('<Response><Message>Unable to save pet, sorry</Message></Response>'); 
                 }
                 sails.log(pet);
+                Event.create({
+                    title: `New rescue: ${p['Dog-Ids']}`,
+                    type: 'checked-in',
+                    description: `${pet.sex} ${pet.breed} - born on: ${pet.birthdate}`
+                }).exec((err, msg) => {
+                    sails.log('new event created');
+                });
                 resolve(`<Response><Message>
                 Okay, I have added ${p['Dog-Ids']} the ${pet.species} - Born on: ${pet.birthdate}
                 </Message></Response>`);        

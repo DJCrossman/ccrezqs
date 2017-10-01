@@ -98,6 +98,7 @@ module.exports = {
                 if (p['phone-number'] == '') {
                     phone = body.From;
                 }
+                console.log(phone);
                 Owner.findOne({phone}).populate('pets').exec(function(err, owner) {
                     console.log(owner);
                     owner.pets.add(dog.id);

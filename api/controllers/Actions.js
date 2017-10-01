@@ -47,6 +47,7 @@ module.exports = {
             when: p.date,
             description: `${p.Medical} at ${p.time} on ${p.date}`
         }).exec((err, msg) => {
+            if (err) { sails.log(err); return; }
             sails.log('new event created');
         });
         return `<Response><Message>Okay, I have booked ${p['Dog-Ids']} ${medName} at ${p.time} on ${p.date}</Message></Response>`;         

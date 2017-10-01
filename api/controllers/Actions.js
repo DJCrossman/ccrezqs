@@ -100,6 +100,11 @@ module.exports = {
                 }
                 console.log(phone);
                 Owner.findOne({phone}).populate('pets').exec(function(err, owner) {
+                    if (err) {
+                        resolve(`<Response><Message>
+                        Couldn't find owner with that number
+                        </Message></Response>`); 
+                    }
                     console.log(owner);
                     owner.pets.add(dog.id);
                     dog.owners.add(owner.id);

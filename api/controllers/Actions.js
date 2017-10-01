@@ -94,13 +94,13 @@ module.exports = {
                     sails.log(err);
                     resolve('<Response><Message>That dog does not exist</Message></Response>'); 
                 }
-                let phone = p['phone-number'];
+                let phoneNum = p['phone-number'];
                 if (p['phone-number'] == '') {
-                    phone = body.From;
+                    phoneNum = body.From;
                 }
-                console.log(phone);
-                Owner.findOne({phone}).populate('pets').exec(function(err, owner) {
-                    if (err) {
+                console.log(phoneNum);
+                Owner.findOne({ phone : phoneNum }).populate('pets').exec(function(err, owner) {
+                    if (err || !owner || owner == undefined) {
                         resolve(`<Response><Message>
                         Couldn't find owner with that number
                         </Message></Response>`); 

@@ -94,7 +94,7 @@ module.exports = {
                     sails.log(err);
                     resolve('<Response><Message>That dog does not exist</Message></Response>'); 
                 }
-                let phoneNum = p['phone-number'];
+                let phoneNum = '+' + p['phone-number'];
                 if (p['phone-number'] == '') {
                     phoneNum = body.From;
                 }

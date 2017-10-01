@@ -38,7 +38,7 @@ module.exports = {
         let type = '';
         if (p.Medical == "Shots") {
             type = 'vaccine'
-        } else if (p.Medical == "Vet") {
+        } else if (p.Medical == "Vet" || p.Medical == 'Spaying' || p.Medical == 'Neutering') {
             type = 'medical'
         }
         Event.create({
